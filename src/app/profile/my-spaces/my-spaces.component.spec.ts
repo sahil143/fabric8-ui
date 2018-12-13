@@ -20,8 +20,8 @@ import { initContext, TestContext } from 'testing/test-context';
 import { ExtProfile, GettingStartedService } from '../../getting-started/services/getting-started.service';
 import { spaceMock } from '../../shared/context.service.mock';
 import { UserSpacesService } from '../../shared/user-spaces.service';
-import { MySpacesComponent } from './my-spaces.component';
 import { SpacesType } from './my-spaces-toolbar/my-spaces-toolbar.component';
+import { MySpacesComponent } from './my-spaces.component';
 
 @Component({
   template: '<alm-my-spaces></alm-my-spaces>'
@@ -183,7 +183,7 @@ describe('MySpacesComponent', (): void => {
   });
 
   describe('#spaces', (): void => {
-    it('should return the contents of _spaces', (): void => {
+    it('should return the contents of displayedSpaces', (): void => {
       const component: MySpacesComponent = testContext.testedDirective;
       const result: Space[] = component.spaces;
       expect(result).toEqual([spaceMock1, spaceMock2]);
@@ -193,17 +193,6 @@ describe('MySpacesComponent', (): void => {
       const component: MySpacesComponent = testContext.testedDirective;
       component.toggleChange(SpacesType.SHAREDSPACES);
       expect(component.spaces).toEqual([spaceMock3]);
-    });
-  });
-
-  describe('#handlePinChange', (): void => {
-    it('should delegate to savePins and updateSpaces if the selected space exists in the user\'s spaces', (): void => {
-      const component: MySpacesComponent = testContext.testedDirective;
-      spyOn(component, 'savePins').and.callThrough();
-      spyOn(component, 'updateSpaces');
-      component.handlePinChange(spaceMock1);
-      expect(component.savePins).toHaveBeenCalled();
-      expect(component.updateSpaces).toHaveBeenCalled();
     });
   });
 
@@ -231,8 +220,8 @@ describe('MySpacesComponent', (): void => {
       const component: MySpacesComponent = testContext.testedDirective;
       spyOn(component, 'savePins').and.callThrough();
       spyOn(component, 'updateSpaces');
-      component.handlePinChange(spaceMock1);
-      expect((component.spaces[0] as any).showPin).toBe(false);
+      component.handlePinChange(spaceMock2);
+      expect((component.spaces[1] as any).showPin).toBe(true);
     });
   });
 
