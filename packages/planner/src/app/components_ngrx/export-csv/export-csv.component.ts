@@ -20,7 +20,6 @@ export class ExportCsvComponent {
     this.route.queryParams.pipe(filter((q) => !!Object.keys(q).length)),
   ).pipe(
     switchMap(([space, query]) => {
-      console.log('################333333', query);
       const currentQuery = this.filterService.queryToJson(query.q);
       const spaceQuery = this.filterService.queryBuilder('space', EQUAL, space.id);
       const expression = {
