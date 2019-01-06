@@ -1,6 +1,6 @@
 import { Component, Input, Inject } from '@angular/core';
 import { FilterService } from '../../services/filter.service';
-import { WIT_API_URL, Space } from 'ngx-fabric8-wit';
+import { WIT_API_URL } from 'ngx-fabric8-wit';
 import { SpaceQuery } from '../../models/space';
 import { Observable, of, combineLatest } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
@@ -13,7 +13,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ExportCsvComponent {
   @Input() isDisabled: boolean;
-  @Input() query: string;
 
   public csvLink: Observable<string> = combineLatest(
     this.spaceQuery.getCurrentSpace.pipe(filter((s) => !!s)),
