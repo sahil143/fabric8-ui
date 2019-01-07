@@ -14,6 +14,13 @@ import { ActivatedRoute } from '@angular/router';
 export class ExportCsvComponent {
   @Input() isDisabled: boolean;
 
+  constructor(
+    private spaceQuery: SpaceQuery,
+    private filterService: FilterService,
+    private route: ActivatedRoute,
+    @Inject(WIT_API_URL) private baseApiURL: string,
+  ) {}
+
   public csvLink: Observable<string> = combineLatest(
     this.spaceQuery.getCurrentSpace.pipe(filter((s) => !!s)),
     this.route.queryParams.pipe(filter((q) => !!Object.keys(q).length)),
@@ -33,11 +40,4 @@ export class ExportCsvComponent {
       );
     }),
   );
-
-  constructor(
-    private spaceQuery: SpaceQuery,
-    private filterService: FilterService,
-    private route: ActivatedRoute,
-    @Inject(WIT_API_URL) private baseApiURL: string,
-  ) {}
 }
