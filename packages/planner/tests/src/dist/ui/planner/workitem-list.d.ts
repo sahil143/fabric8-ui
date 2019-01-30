@@ -1,0 +1,30 @@
+import { ElementFinder } from 'protractor';
+import * as ui from '../../ui';
+import { BaseElement } from './../base.element';
+import { WorkItemListEntry } from './workitem-list-entry';
+export declare class WorkItemList extends BaseElement {
+    overlay: ui.BaseElement;
+    datatableHeaderdiv: ui.BaseElement;
+    datatableHeaderCell: ui.BaseElementArray;
+    datatableHeaderCellLabel: ui.BaseElementArray;
+    datatableRow: ui.BaseElementArray;
+    childWorkItemTypeDropdown: ui.Dropdown;
+    empty_template: ui.BaseElement;
+    empty_workitem_list: ui.BaseElement;
+    constructor(el: ElementFinder, name?: string);
+    ready(): Promise<void>;
+    clickWorkItem(title: string): Promise<void>;
+    hasWorkItem(title: string, showCompleted?: boolean): Promise<boolean>;
+    workItem(title: string): WorkItemListEntry;
+    clickInlineQuickAdd(title: string): Promise<void>;
+    getInlineQuickAddClass(title: string): Promise<string>;
+    getDataTableHeaderCellCount(): Promise<number>;
+    selectChildWorkItemType(type: string): Promise<void>;
+    iterationText(title: string): Promise<string>;
+    clickWorkItemLabel(title: string): Promise<void>;
+    clickWorkItemDeleteIcon(title: string): Promise<void>;
+    isTitleTextBold(title: string): Promise<string>;
+    openDetailPage(title: string): Promise<void>;
+    getUnassignedWorkItemCount(assigneeName: string): Promise<any>;
+    emptyTemplateDisplayed(): Promise<boolean>;
+}

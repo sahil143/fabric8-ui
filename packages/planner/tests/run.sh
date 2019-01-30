@@ -59,8 +59,8 @@ start_webdriver() {
   # Start selenium server just for this test run
   log.info "Starting Webdriver and Selenium..."
   log.info "Webdriver will log to:$GREEN $log_file"
-  npm run webdriver:update -- --versions.chrome $WEBDRIVER_VERSION
-  npm run webdriver:start -- --versions.chrome $WEBDRIVER_VERSION >> "$log_file" 2>&1 &
+  npm run webdriver:update -- --versions.chrome "2.45"
+  npm run webdriver:start -- --versions.chrome "2.45" >> "$log_file" 2>&1 &
   webdriver_pid=$!
 }
 
@@ -87,7 +87,7 @@ main() {
   local base_url=${BASE_URL:-"http://localhost:8080/"}
   local temp_dir=${TEMP_DIR:-$(mktemp -d)}
   local specs_pattern=${SPECS_PATTERN:-"${temp_dir}/**/*.spec.js"}
-  local test_source_path=${TEST_SOURCE_PATH:-"../src/tests"}
+  local test_source_path=${TEST_SOURCE_PATH:-"./src"}
   local protractor="$(npm bin)/protractor"
   local typescript="$(npm bin)/tsc"
   local suite=${1:-""}
@@ -103,8 +103,8 @@ main() {
 
   # Compile tests and base files
   echo "Compiling tests.."
-  ${typescript} --outDir "${temp_dir}" --project "${test_source_path}"
-  ${typescript} --outDir "${temp_dir}" --project "."
+  ${typescript} --outDir "${temp_dir}" --project "${test_source_path}" --skipLibCheck
+  ${typescript} --outDir "${temp_dir}" --project "." --skipLibCheck
 
   echo "Getting test context dependencies.."
   cp "package.json" "${temp_dir}/"

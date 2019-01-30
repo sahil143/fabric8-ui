@@ -18,12 +18,8 @@
   },
   "dependencies": {
     "jasmine-spec-reporter": "4.2.1",
-    "protractor": "5.2.2",
+    "protractor": "5.2.0",
     "typescript": "2.9.2"
   },
-  "peerDependencies": {},
-  "devDependencies": {
-    "@types/jasmine": "2.8.5",
-    "@types/uuid": "^3.4.3"
-  }
+  "peerDependencies": {}
 }
